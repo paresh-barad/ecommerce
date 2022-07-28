@@ -5,7 +5,6 @@ const auth = require('../../middleware/auth');
 const Catalog = require('../../models/catalog');
 const multer = require('multer');
 const path = require('path');
-const mongoose = require('mongoose');
 const keys = require('../../config/keys');
 const jwt = require('jsonwebtoken');
 const Order = require('../../models/order');
@@ -74,7 +73,7 @@ router.get('/orders', auth, async (req, res) => {
         const orders = await Order.find({ seller: sellerId }).populate('products').populate('buyer').populate('seller');
         res.status(200).json({
             success: true,
-            product: orders
+            orders
         });
     } catch (error) {
         console.log(error)
